@@ -23,8 +23,9 @@
                     @endif
                 @endforeach
             </ul>
-            <div class="card-body text-center">
-                <a href="#" class="btn btn-success card-link">imprimer</a>
+            <div class="card-body d-flex justify-content-around">
+                <a href="{{url('/')}}" class="btn btn-dark card-link">Retour</a>
+                <a href="#" class="btn btn-success card-link">Imprimer</a>
             </div>
         </div>
 

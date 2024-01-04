@@ -48,6 +48,7 @@
                                             <div class="form-group">
                                                 <span class="form-label">D'où partez-vous ? </span>
                                                 <select id="depart" name="depart" class="form-control">
+                                                    <option value="">départ</option>
                                                     @foreach ($gares as $gare)
                                                         <option value="{{ $gare->id }}" >{{ $gare->nom }}</option>
                                                     @endforeach
@@ -58,6 +59,7 @@
                                             <div class="form-group">
                                                 <span class="form-label">Où allez-vous ?</span>
                                                 <select id="destination" name="destination" class="form-control">
+                                                    <option value="">destination</option>
                                                     @foreach ($garesdest as $gare)
                                                         <option value="{{ $gare->id }}">{{ $gare->nom }}</option>
                                                     @endforeach
@@ -67,7 +69,7 @@
                                         <div class="col-md-2">
 											<div class="form-group">
 												<span class="form-label">Prix en FCFA</span>
-												<input id="prix" name="prix" class="form-control" readonly value="1500">
+												<input id="prix" name="prix" class="form-control" readonly value="0">
 											</div>
 										</div>
                                     </div>
@@ -102,33 +104,58 @@
             let garedepart = tab_gares.find( (element)=> element.id==+depart.value);
             let garedestination = tab_gares.find( (element)=> element.id==+destination.value);
 
-            switch(Math.abs(garedepart.zone-garedestination.zone)){
-                case 0:
-                    prix.value = "500";
-                    break;
-                case 1:
-                    prix.value = "1000";
-                    break;
-                case 2:
-                    prix.value = "1500";
-                    break;
+            if(garedepart.id!=garedestination.id){
+                switch(Math.abs(garedepart.zone-garedestination.zone)){
+                    case 0:
+                        prix.value = "500";
+                        break;
+                    case 1:
+                        prix.value = "1000";
+                        break;
+                    case 2:
+                        prix.value = "1500";
+                        break;
+                }
+            }else{
+                alert('Choisissez deux gares différents !');
+                depart.value = '';
+                depart.innerHTML = `<option value="">départ</option>`;
+                tab_gares.forEach(element => {
+                    depart.innerHTML +=`
+                        <option value='${element.id}'>${element.nom}</option>
+                    `;
+                });
+                prix.value = '0';
             }
         });
         
         destination.addEventListener('change', ()=>{
+            
             let garedepart = tab_gares.find( (element)=> element.id==+depart.value);
             let garedestination = tab_gares.find( (element)=> element.id==+destination.value);
 
-            switch(Math.abs(garedepart.zone-garedestination.zone)){
-                case 0:
-                    prix.value = "500";
-                    break;
-                case 1:
-                    prix.value = "1000";
-                    break;
-                case 2:
-                    prix.value = "1500";
-                    break;
+            if(garedepart.id!=garedestination.id){
+                switch(Math.abs(garedepart.zone-garedestination.zone)){
+                    case 0:
+                        prix.value = "500";
+                        break;
+                    case 1:
+                        prix.value = "1000";
+                        break;
+                    case 2:
+                        prix.value = "1500";
+                        break;
+                }
+            }else{
+                alert('Choisissez deux gares différents !');
+                destination.value = '';
+                destination.innerHTML = `<option value="">destination</option>`;
+                tab_gares.forEach(element => {
+                    destination.innerHTML +=`
+                        <option value='${element.id}'>${element.nom}</option>
+                    `;
+                });
+                prix.value = '0';
             }
         });
 

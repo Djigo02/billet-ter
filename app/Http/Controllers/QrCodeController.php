@@ -49,7 +49,7 @@ class QrCodeController extends Controller
             'zone' => "Zone $garedepart->zone_id -> $garedestination->zone_id",
             'depart'=> "Depart : $garedepart->nom",
             'destination'=> "Destination : $garedestination->nom",
-            'prix'=>"Prix : $request->prix",
+            'prix'=>"Prix : $request->prix Francs CFA",
             'date'=> "Date emission : ".$emission,
             'fin'=> "Fin de validite : $fin"
         ];
