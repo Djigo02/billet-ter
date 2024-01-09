@@ -94,6 +94,7 @@
         const prix = document.querySelector('#prix');
 
         let listeGares = {!! json_encode($gares->toArray()) !!};
+
         var tab_gares = listeGares.map( (element) => ({
             id : element.id,
             nom : element.nom,
