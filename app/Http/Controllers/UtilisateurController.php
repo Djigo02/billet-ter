@@ -1,8 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Gare;
+use App\Models\Utilisateur;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 class UtilisateurController extends Controller
 {
@@ -11,6 +14,7 @@ class UtilisateurController extends Controller
         return view('login');
     }
     
+    
     // Page apres authentification
     public function doLogin(Request $request){
         $request->validate([
@@ -18,7 +22,16 @@ class UtilisateurController extends Controller
             'password' => 'required'
         ]);
 
-        return view('welcome');
+        $utilisateur = Utilisateur::where([
+            'email' => $request->input('email'),
+        ])->first();
+
+        if($utilisateur!=null && Hash::check($request->input('password'), $utilisateur->password)){
+            Session::put('utilisateur',$utilisateur);
+            return redirect('/reserver');
+        }else{
+            return back()->with('message', 'Email et/ou mot de passe incorrect !');
+        }
     }
 
     // Page d'inscription
@@ -29,12 +42,20 @@ class UtilisateurController extends Controller
     // Page apres Registration
     public function doSignup(Request $request){
         $request->validate([
-            'prenom' => 'required',
-            'nom' => 'required',
-            'email' => 'required',
-            'password' => 'required'
+            'prenom' => 'required|min:2',
+            'nom' => 'required|min:2',
+            'email' => 'required|email',
+            'password' => 'required|min:6'
         ]);
 
-        return view('login', ['message'=>'Compte créer avec succés !']);
+        $utilisateur = new Utilisateur();
+        $utilisateur->prenom = $request->prenom;
+        $utilisateur->nom = $request->nom;
+        $utilisateur->email = $request->email;
+        $utilisateur->password = Hash::make($request->password);
+        $utilisateur->role = "voyageur";
+        $utilisateur->save();
+
+        return redirect('/login')->with('message','Compte créer avec succés !');
     }
 }

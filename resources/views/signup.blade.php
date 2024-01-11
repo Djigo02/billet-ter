@@ -2,7 +2,7 @@
 <html lang="fr">
 
 <head>
-    <title>Se connecter</title>
+    <title>S'inscrire</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -21,35 +21,49 @@
                 <div class="col-md-7 col-lg-5">
                     <div class="login-wrap p-4 p-md-5">
                         <div style="background-color:#9a8067;"
-                            class="icon d-flex align-items-center justify-content-center">
-                            <span class="fa fa-user-o"></span>
+                        class="icon d-flex align-items-center justify-content-center">
+                            <span 
+                            class="fa fa-user-o"></span>
                         </div>
-                        @if (Session::has('message'))
-                            <div class="alert alert-success col-8 offset-2">{{Session::get('message')}}</div>
-                        @endif
-                        <h3 class="text-center mb-4">Connectez-vous</h3>
-                        <form action="{{ route('utilisateurs.doLogin') }}" method="post" class="login-form">
+                        <h3 class="text-center mb-4">Inscrivez-vous</h3>
+                        <form action="{{route('utilisateurs.register')}}" method="POST" class="login-form">
                             @csrf
                             @method('POST')
                             <div class="form-group">
-                                <input type="text" class="form-control rounded-left @error('email') is-invalid @enderror" placeholder="Email"
-                                    name="email" required>
+                                <input type="text" class="form-control rounded-left" placeholder="Prenom" name="prenom" required>
                             </div>
+                            @error('prenom')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
 
+                            <div class="form-group">
+                                <input type="text" class="form-control rounded-left" placeholder="Nom" name="nom" required>
+                            </div>
+                            @error('nom')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+
+                            <div class="form-group">
+                                <input type="text" class="form-control rounded-left" placeholder="Email" name="email" required>
+                            </div>
                             @error('email')
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
 
                             <div class="form-group d-flex">
-                                <input type="password" class="form-control rounded-left" placeholder="Password"
-                                    name="password" required>
+                                <input type="password" class="form-control rounded-left" name="password" placeholder="Password"
+                                    required>
                             </div>
+                            @error('password')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+
                             <div class="form-group">
                                 <button type="submit" style="background-color:#9a8067; color: #fff"
-                                    class="form-control btn rounded submit px-3">Se connecter</button>
+                                    class="form-control btn rounded submit px-3">S'inscrire</button>
                             </div>
                             <div class="text-center">
-                                <a href="/signup">Vous n'avez pas de compte ? Creer un compte.</a>
+                                <a href="/login">Vous avez un compte ? Connectez-vous.</a>
                             </div>
                         </form>
                     </div>

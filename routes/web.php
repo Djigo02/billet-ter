@@ -22,6 +22,10 @@ Route::get('/', function () {
 });
 
 
+Route::get('/reserver', function(){
+    return view('welcome', ['gares'=>Gare::all(), 'garesdest'=>Gare::all()->sortByDesc('id')]);
+})->name('reserver');
+
 Route::post('/recu-billet', [QrCodeController::class, 'generate'])->name('recu-billet');
 
 // Route::get('/qrcode',[GareController::class, 'generate']);

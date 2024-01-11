@@ -1,3 +1,11 @@
+:root{
+	--color-primary: #9a8067;
+	--color-secondary: #55402c;;
+}
+.navbar{
+	font-size: 14px;
+}
+
 a{
 text-decoration: none;
 color: #9a8067;
@@ -13,6 +21,18 @@ a:focus{
 	text-decoration: none;
 }
 
+.btn-reserve{
+	background-color: var(--color-primary);
+	color: #fff;
+	border: none;
+	border-radius: 10px;
+	height: 50px;
+}
+
+.btn-reserve:hover{
+	background-color: var(--color-secondary);
+}
+
 body{
 	background-image: url('../img/background.jpg');
 	font-family: 'Source Sans Pro', sans-serif;
@@ -22,18 +42,9 @@ body{
 }
 
 .section {
-	position: relative;
-	height: 80vh;
+	margin-top: 100px;
 }
 
-.section .section-center {
-	position: absolute;
-	top: 50%;
-	left: 0;
-	right: 0;
-	-webkit-transform: translateY(-50%);
-	transform: translateY(-50%);
-}
 
 .booking-form {
 	background: #fff;
@@ -83,7 +94,7 @@ body{
 	-webkit-box-shadow: none;
 	box-shadow: none;
 	padding: 0;
-	font-size: 28px;
+	font-size: 20px;
 	color: #3c404a;
 	font-weight: 700;
 }
