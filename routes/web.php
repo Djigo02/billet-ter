@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\QrCodeController;
+use App\Http\Controllers\UtilisateurController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Gare;
 
@@ -16,14 +17,20 @@ use App\Models\Gare;
 */
 
 Route::get('/', function () {
-    return view('welcome', ['gares'=>Gare::all(), 'garesdest'=>Gare::all()->sortByDesc('id')]);
+    //return view('welcome', ['gares'=>Gare::all(), 'garesdest'=>Gare::all()->sortByDesc('id')]);
+    return redirect('/login');
 });
 
-Route::get('/login', function () {
-    return view('login');
-});
 
 Route::post('/recu-billet', [QrCodeController::class, 'generate'])->name('recu-billet');
 
-
 // Route::get('/qrcode',[GareController::class, 'generate']);
+
+// Authentification et enregistrement
+
+Route::get('/login', [UtilisateurController::class, 'login'])->name('utilisateurs.login');
+Route::post('/auth', [UtilisateurController::class, 'doLogin'])->name('utilisateurs.doLogin');
+
+Route::get('/signup', [UtilisateurController::class, 'signup'])->name('utilisateurs.signup');
+Route::post('/register', [UtilisateurController::class, 'doSignup'])->name('utilisateurs.register');
+

@@ -39,7 +39,7 @@
                                     class="form-control btn rounded submit px-3">Se connecter</button>
                             </div>
                             <div class="text-center">
-                                <a href="#">Vous n'avez pas de compte ? Creer un compte.</a>
+                                <a href="/signup">Vous n'avez pas de compte ? Creer un compte.</a>
                             </div>
                         </form>
                     </div>
