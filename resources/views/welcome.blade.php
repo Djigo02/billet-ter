@@ -20,6 +20,9 @@
     <!-- Custom stlylesheet -->
     <link type="text/css" rel="stylesheet" href="assets/front-office/css/style.css" />
 
+    {{-- Font awesome --}}
+    <script src="https://kit.fontawesome.com/845e4e8471.js" crossorigin="anonymous"></script>
+
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -30,13 +33,15 @@
 </head>
 
 <body>    
-    {{-- START --}}
+
+    @if (Session::get('utilisateur'))
+            {{-- START --}}
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container">
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="h2" aria-current="page" href="#">Bonjour {{Session::get('utilisateur')['prenom']}} {{Session::get('utilisateur')['nom']}}</a>
+                <a class="h2" aria-current="page" > <i class="fa-solid fa-train-subway"></i> Bonjour {{Session::get('utilisateur')['prenom']}} {{Session::get('utilisateur')['nom']}}</a>
               </li>
             </ul>
             <form class="d-flex mr-4" role="search">
@@ -45,10 +50,9 @@
                       Option
                     </a>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="#">Action</a></li>
-                      <li><a class="dropdown-item" href="#">Another action</a></li>
+                      <li><a class="dropdown-item" href="">{{Session::get('utilisateur')['prenom']}} {{Session::get('utilisateur')['nom']}}</a></li>
                       <li><hr class="dropdown-divider"></li>
-                      <li><a class="dropdown-item" href="#">Something else here</a></li>
+                      <li><a class="dropdown-item" href="#"><i class="fa-solid fa-power-off"></i> Deconnexion</a></li>
                     </ul>
                   </div>
             </form>
@@ -113,7 +117,22 @@
             </div>
         </div>
     </div>
-    <button class="btn-reserve col-6 offset-3 mt-4" style="font-size: 18px ">Mes reservations</button>
+    {{-- Bouton pour voir ses reservations --}}
+    <button class="btn-reserve col-6 offset-3 mt-4" style="font-size: 18px ">Voir mes reservations</button>
+    
+    @else
+        <div id="booking" class="section">
+            <div class="section-center">
+                <div class="container">
+                    <div class="row">
+                        <h1>Veuillez vous connecter</h1>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
     <script>
         const bookBtn = document.querySelector('#book');
         const depart = document.querySelector('#depart');

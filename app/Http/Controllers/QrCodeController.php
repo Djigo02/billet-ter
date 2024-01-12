@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Gare;
+use App\Models\Reservation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class QrCodeController extends Controller
@@ -53,6 +55,20 @@ class QrCodeController extends Controller
             'date'=> "Date emission : ".$emission,
             'fin'=> "Fin de validite : $fin"
         ];
+
+        // Insertion des données dans la table reservations
+        $reservation = new Reservation();
+        $reservation->image = $chemin;
+        $reservation->zone = "Zone $garedepart->zone_id -> $garedestination->zone_id";
+        $reservation->depart = "Depart : $garedepart->nom";
+        $reservation->destination = "Destination : $garedestination->nom";
+        $reservation->prix = $request->prix;
+        $reservation->date_emission = "Date emission : ".$emission;
+        $reservation->fin_validite = "Fin de validite : $fin";
+        $reservation->id_user = Session::get('utilisateur')['id'];
+        // dd($reservation);
+        $reservation->save();
+        
         return view("qrcode", ['qrcode'=>$qrcode, 'info'=>$info]);
     }
 }
