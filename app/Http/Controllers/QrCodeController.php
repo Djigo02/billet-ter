@@ -48,8 +48,8 @@ class QrCodeController extends Controller
             'fin'=> "Fin de validite : $fin"
         ];
         
-        //qrcode à afficher
-        $qrcode = QrCode::size(150)->generate("
+        //qrcode à afficher enregistrer dans un repertoire du projet
+        QrCode::size(150)->generate("
             Zone concernée : $garedepart->zone_id -> $garedestination->zone_id \n
             Depart : $garedepart->nom \n
             Destination : $garedestination->nom \n
@@ -81,9 +81,10 @@ class QrCodeController extends Controller
             'zone' => $detail->zone,
             'depart'=> $detail->depart,
             'destination'=> $detail->destination,
-            'prix'=> $detail->prix."Francs CFA",
-            'date'=> $detail->image,
-            'fin'=> $detail->image
+            'prix'=> $detail->prix." Francs CFA",
+            'date'=> $detail->date_emission,
+            'fin'=> $detail->fin_validite
         ];
+        return view("reservations.qrcode", ['info'=>$info]);
     }
 }

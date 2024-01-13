@@ -32,6 +32,8 @@ Route::get('/reservations/{id}', [ReservationController::class, 'reservations'])
 
 Route::post('/recu-billet', [QrCodeController::class, 'generate'])->name('recu-billet');
 
+Route::get('/billet/{id}', [QrCodeController::class, 'detailRecu'])->name('detailRecu');
+
 // Authentification et enregistrement
 
 Route::get('/login', [UtilisateurController::class, 'login'])->name('utilisateurs.login');
