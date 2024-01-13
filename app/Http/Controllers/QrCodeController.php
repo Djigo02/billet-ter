@@ -29,8 +29,8 @@ class QrCodeController extends Controller
         $garedestination = Gare::all()->find($request->destination);
 
         //Date emission et fin de validite
-        $emission = date('d-m-Y');
-        $fin = date('d-m-Y', strtotime(date('d-M-Y'). ' + 5 days'));
+        $emission = date('d-m-Y H:i:s');
+        $fin = date('d-m-Y', strtotime(date('d-M-Y H:i:s'). ' + 5 days'));
 
         //chemin pour enregistrer le qrcode
         $chemin = "assets/qrcode/FA_".date('dmyHis').".svg";
@@ -71,6 +71,19 @@ class QrCodeController extends Controller
         // dd($reservation);
         $reservation->save();
         
-        return view("qrcode", ['qrcode'=>$qrcode, 'info'=>$info]);
+        return view("reservations.qrcode", ['info'=>$info]);
+    }
+
+    public function detailRecu($id){
+        $detail = Reservation::all()->find($id);
+        $info = [
+            'image' => $detail->image,
+            'zone' => $detail->zone,
+            'depart'=> $detail->depart,
+            'destination'=> $detail->destination,
+            'prix'=> $detail->prix."Francs CFA",
+            'date'=> $detail->image,
+            'fin'=> $detail->image
+        ];
     }
 }

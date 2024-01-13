@@ -98,6 +98,7 @@
         <button type="submit" class="btn-reserve col-6 offset-3 mt-4" style="font-size: 18px ">Voir mes reservations</button>
     </form>
     
+    
     @else
         <a href="{{route('login')}}" id="log"></a>
         <script>

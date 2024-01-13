@@ -13,8 +13,8 @@ class ReservationController extends Controller
 
     public function reservations($id){
         if($id==Session::get('utilisateur')['id']){
-            $reservations = DB::table('reservations')->where('id_user','=',$id)->get();
-            return view('reservations', compact('reservations'));
+            $reservations = DB::table('reservations')->where('id_user','=',$id)->get()->sortByDesc('id');
+            return view('reservations.reservations', compact('reservations'));
         }else{
             return redirect('/login');
         }

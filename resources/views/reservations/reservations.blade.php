@@ -30,15 +30,15 @@
                                     $key != 'created_at' &&
                                     $key != 'updated_at' &&
                                     $key != 'prix')
-                                <li class="list-group-item text-center text-center">{{ $item }}</li>
+                                <li class="list-group text-center text-center">{{ $item }}</li>
                             @endif
                         @endforeach
                         <li class="list-group-item text-center text-center">Prix : {{ $reservation->prix }} FCFA</li>
                     </ul>
-                    <div class="card-body d-flex justify-content-around">
+                    {{-- <div class="card-body d-flex justify-content-around"> --}}
                         {{-- <a href="{{ url('/') }}" class="btn btn-dark card-link">Retour</a> --}}
-                        <a href="#" class="btn btn-success card-link">Imprimer</a>
-                    </div>
+                        {{-- <a href="#" class="btn btn-success card-link">Imprimer</a> --}}
+                    {{-- </div> --}}
                 </div>
 
             </div>

@@ -18,14 +18,14 @@ use App\Models\Gare;
 */
 
 Route::get('/', function () {
-    //return view('welcome', ['gares'=>Gare::all(), 'garesdest'=>Gare::all()->sortByDesc('id')]);
+    //return view('reservations.welcome', ['gares'=>Gare::all(), 'garesdest'=>Gare::all()->sortByDesc('id')]);
     return redirect('/login');
 })->name('login');
 
 
 // Page vers la reservation
 Route::get('/reserver', function(){
-    return view('reserver', ['gares'=>Gare::all(), 'garesdest'=>Gare::all()->sortByDesc('id')]);
+    return view('reservations.reserver', ['gares'=>Gare::all(), 'garesdest'=>Gare::all()->sortByDesc('id')]);
 })->name('reserver');
 
 Route::get('/reservations/{id}', [ReservationController::class, 'reservations'])->name('mes_reservations');

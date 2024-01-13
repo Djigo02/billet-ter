@@ -11,7 +11,7 @@ class UtilisateurController extends Controller
 {
     // Page de connexion
     public function login(){
-        return view('login');
+        return view('register.login');
     }
     
     
@@ -28,7 +28,7 @@ class UtilisateurController extends Controller
 
         if($utilisateur!=null && Hash::check($request->input('password'), $utilisateur->password)){
             Session::put('utilisateur',$utilisateur);
-            return redirect('/reserver');
+            return $utilisateur->role == 'voyageur' ? redirect('/reserver'): redirect('/admin');
         }else{
             return back()->with('message', 'Email et/ou mot de passe incorrect !');
         }
@@ -36,7 +36,7 @@ class UtilisateurController extends Controller
 
     // Page d'inscription
     public function signup(){
-        return view('signup');
+        return view('register.signup');
     }
 
     // Page apres Registration
@@ -65,6 +65,6 @@ class UtilisateurController extends Controller
     // Deconnexion
     public function deconnexion(){
         Session::forget('utilisateur');
-        return view('login');
+        return view('register.login');
     }
 }
