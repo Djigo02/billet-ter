@@ -4,10 +4,10 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="h2" aria-current="page" > <i class="fa-solid fa-train-subway"></i> Bonjour {{Session::get('utilisateur')['prenom']}} {{Session::get('utilisateur')['nom']}}</a>
+            <p class="h4" aria-current="page" > <i class="fa-solid fa-train-subway"></i> Bonjour {{Session::get('utilisateur')['prenom']}} {{Session::get('utilisateur')['nom']}}</p>
           </li>
         </ul>
-        <form class="d-flex mr-4" role="search">
+        <form class="d-flex mr-5" role="search">
             <div class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Option

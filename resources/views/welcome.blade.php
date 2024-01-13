@@ -95,8 +95,6 @@
     </div>
     {{-- Bouton pour voir ses reservations --}}
     <form action="{{route('mes_reservations', [Session::get('utilisateur')['id']])}}" method="get">
-        @csrf
-        @method('GET')
         <button type="submit" class="btn-reserve col-6 offset-3 mt-4" style="font-size: 18px ">Voir mes reservations</button>
     </form>
     
