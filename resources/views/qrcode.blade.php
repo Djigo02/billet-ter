@@ -25,14 +25,18 @@
                     @endforeach
                 </ul>
                 <div class="card-body d-flex justify-content-around">
-                    <a href="{{url('/')}}" class="btn btn-dark card-link">Retour</a>
+                    <a href="{{url('/reserver')}}" class="btn btn-dark card-link">Retour</a>
                     <a href="{{route('mes_reservations', [Session::get('utilisateur')['id']])}}" class="btn btn-success card-link">Mes reservations</a>
                 </div>
             </div>
 
         </div>
     @else
-        
+        <a href="{{route('login')}}" id="log"></a>
+        <script>
+            btn = document.querySelector('#log');
+            btn.click();
+        </script>
     @endif
 </body>
 

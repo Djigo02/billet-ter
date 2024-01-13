@@ -25,7 +25,7 @@ Route::get('/', function () {
 
 // Page vers la reservation
 Route::get('/reserver', function(){
-    return view('welcome', ['gares'=>Gare::all(), 'garesdest'=>Gare::all()->sortByDesc('id')]);
+    return view('reserver', ['gares'=>Gare::all(), 'garesdest'=>Gare::all()->sortByDesc('id')]);
 })->name('reserver');
 
 Route::get('/reservations/{id}', [ReservationController::class, 'reservations'])->name('mes_reservations');

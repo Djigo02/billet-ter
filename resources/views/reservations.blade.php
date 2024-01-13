@@ -17,7 +17,7 @@
     <div class="alert alert-success col-4 offset-4 h5 text-center mb-4">Mes reservations Billet-TER</div>
     <div class="container row">
         @foreach ($reservations as $reservation)
-            <div class="container mt-3 col-3 mb-2 d-flex align-items-center justify-content-center">
+            <div class="container mt-3 col-3 offset-1 mb-2 d-flex align-items-center justify-content-center">
                 <div class="card" style="width: 18rem;">
                     <div class="text-center mt-2"><img src="{{ asset($reservation->image) }}" alt="Qr Code reçu"></div>
                     <br>
@@ -36,7 +36,7 @@
                         <li class="list-group-item text-center text-center">Prix : {{ $reservation->prix }} FCFA</li>
                     </ul>
                     <div class="card-body d-flex justify-content-around">
-                        <a href="{{ url('/') }}" class="btn btn-dark card-link">Retour</a>
+                        {{-- <a href="{{ url('/') }}" class="btn btn-dark card-link">Retour</a> --}}
                         <a href="#" class="btn btn-success card-link">Imprimer</a>
                     </div>
                 </div>

@@ -108,6 +108,7 @@
 
     <script>
         const bookBtn = document.querySelector('#book');
+
         const depart = document.querySelector('#depart');
         const destination = document.querySelector('#destination');
         const prix = document.querySelector('#prix');
@@ -179,7 +180,15 @@
             }
         });
 
-        
+        bookBtn.addEventListener('click', (e)=>{
+            // e.preventDefault();
+            if(prix.value=='' || depart.value == '' || destination.value==''){
+                bookBtn.setAttribute('type', 'button');
+                alert('Veuillez choisir des gares appropriés svp !');
+            }else{
+                bookBtn.setAttribute('type', 'submit');
+            }
+        });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>

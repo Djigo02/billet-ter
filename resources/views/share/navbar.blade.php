@@ -1,5 +1,5 @@
 {{-- START --}}
-<nav class="navbar navbar-expand-lg bg-body-tertiary mb-3">
+<nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary mb-3">
     <div class="container">
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
