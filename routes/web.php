@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\QrCodeController;
+use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\UtilisateurController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Gare;
@@ -19,16 +20,17 @@ use App\Models\Gare;
 Route::get('/', function () {
     //return view('welcome', ['gares'=>Gare::all(), 'garesdest'=>Gare::all()->sortByDesc('id')]);
     return redirect('/login');
-});
+})->name('login');
 
 
+// Page vers la reservation
 Route::get('/reserver', function(){
     return view('welcome', ['gares'=>Gare::all(), 'garesdest'=>Gare::all()->sortByDesc('id')]);
 })->name('reserver');
 
-Route::post('/recu-billet', [QrCodeController::class, 'generate'])->name('recu-billet');
+Route::get('/reservations/{id}', [ReservationController::class, 'reservations'])->name('mes_reservations');
 
-// Route::get('/qrcode',[GareController::class, 'generate']);
+Route::post('/recu-billet', [QrCodeController::class, 'generate'])->name('recu-billet');
 
 // Authentification et enregistrement
 
@@ -37,4 +39,5 @@ Route::post('/auth', [UtilisateurController::class, 'doLogin'])->name('utilisate
 
 Route::get('/signup', [UtilisateurController::class, 'signup'])->name('utilisateurs.signup');
 Route::post('/register', [UtilisateurController::class, 'doSignup'])->name('utilisateurs.register');
+Route::get('/deconnexion', [UtilisateurController::class, 'deconnexion'])->name('deconnexion');
 

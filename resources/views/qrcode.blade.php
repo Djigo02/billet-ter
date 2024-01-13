@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    .<div class="alert alert-success col-4 offset-4 h5 text-center ">Reçu Billet-TER</div>
+    <div class="alert alert-success col-4 offset-4 h5 text-center ">Reçu Billet-TER</div>
     <div class="container mt-3 d-flex align-items-center justify-content-center">
         <div class="card" style="width: 18rem;">
             <div class="text-center mt-2"><img src="{{$info['image']}}" alt="Qr Code reçu"></div>

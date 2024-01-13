@@ -29,6 +29,14 @@ a:focus{
 	height: 50px;
 }
 
+#btn-reserve{
+	background-color: var(--color-primary);
+	color: #fff;
+	border: none;
+	border-radius: 10px;
+	height: 50px;
+}
+
 .btn-reserve:hover{
 	background-color: var(--color-secondary);
 }

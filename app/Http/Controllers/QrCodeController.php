@@ -34,15 +34,7 @@ class QrCodeController extends Controller
 
         //chemin pour enregistrer le qrcode
         $chemin = "assets/qrcode/FA_".date('dmyHis').".svg";
-        //qrcode à afficher
-        $qrcode = QrCode::size(150)->generate("
-            Zone concernée : $garedepart->zone_id -> $garedestination->zone_id \n
-            Depart : $request->depart \n
-            Destination : $request->destination \n
-            Prix : $request->prix \n
-            Date emission : $emission \n
-            Fin de validite : $fin \n
-        ", $chemin);
+        
 
 
         //info a afficher sur la page
@@ -55,6 +47,16 @@ class QrCodeController extends Controller
             'date'=> "Date emission : ".$emission,
             'fin'=> "Fin de validite : $fin"
         ];
+        
+        //qrcode à afficher
+        $qrcode = QrCode::size(150)->generate("
+            Zone concernée : $garedepart->zone_id -> $garedestination->zone_id \n
+            Depart : $garedepart->nom \n
+            Destination : $garedestination->nom \n
+            Prix : $request->prix \n
+            Date emission : $emission \n
+            Fin de validite : $fin \n
+        ", $chemin);
 
         // Insertion des données dans la table reservations
         $reservation = new Reservation();

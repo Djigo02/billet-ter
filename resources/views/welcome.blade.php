@@ -35,31 +35,7 @@
 <body>    
 
     @if (Session::get('utilisateur'))
-            {{-- START --}}
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container">
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="h2" aria-current="page" > <i class="fa-solid fa-train-subway"></i> Bonjour {{Session::get('utilisateur')['prenom']}} {{Session::get('utilisateur')['nom']}}</a>
-              </li>
-            </ul>
-            <form class="d-flex mr-4" role="search">
-                <div class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Option
-                    </a>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="">{{Session::get('utilisateur')['prenom']}} {{Session::get('utilisateur')['nom']}}</a></li>
-                      <li><hr class="dropdown-divider"></li>
-                      <li><a class="dropdown-item" href="#"><i class="fa-solid fa-power-off"></i> Deconnexion</a></li>
-                    </ul>
-                  </div>
-            </form>
-          </div>
-        </div>
-      </nav>
-    {{-- END  --}}
+    @include('share.navbar')
       <div id="booking" class="section">
         <div class="section-center">
             <div class="container">
@@ -118,19 +94,18 @@
         </div>
     </div>
     {{-- Bouton pour voir ses reservations --}}
-    <button class="btn-reserve col-6 offset-3 mt-4" style="font-size: 18px ">Voir mes reservations</button>
+    <form action="{{route('mes_reservations', [Session::get('utilisateur')['id']])}}" method="get">
+        @csrf
+        @method('GET')
+        <button type="submit" class="btn-reserve col-6 offset-3 mt-4" style="font-size: 18px ">Voir mes reservations</button>
+    </form>
     
     @else
-        <div id="booking" class="section">
-            <div class="section-center">
-                <div class="container">
-                    <div class="row">
-                        <h1>Veuillez vous connecter</h1>
-
-                    </div>
-                </div>
-            </div>
-        </div>
+        <a href="{{route('login')}}" id="log"></a>
+        <script>
+            btn = document.querySelector('#log');
+            btn.click();
+        </script>
     @endif
 
     <script>

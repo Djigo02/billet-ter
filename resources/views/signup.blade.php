@@ -26,6 +26,9 @@
                             class="fa fa-user-o"></span>
                         </div>
                         <h3 class="text-center mb-4">Inscrivez-vous</h3>
+                        @if (Session::has('message'))
+                            <div class="alert alert-danger col-8 offset-2">{{Session::get('message')}}</div>
+                        @endif
                         <form action="{{route('utilisateurs.register')}}" method="POST" class="login-form">
                             @csrf
                             @method('POST')

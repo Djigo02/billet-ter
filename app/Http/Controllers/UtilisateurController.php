@@ -48,6 +48,9 @@ class UtilisateurController extends Controller
             'password' => 'required|min:6'
         ]);
 
+        if(Utilisateur::where(['email'=>$request->email])->first()){
+            return redirect('/signup')->with('message','Cet adresse a deja un compte !');
+        }
         $utilisateur = new Utilisateur();
         $utilisateur->prenom = $request->prenom;
         $utilisateur->nom = $request->nom;
@@ -57,5 +60,11 @@ class UtilisateurController extends Controller
         $utilisateur->save();
 
         return redirect('/login')->with('message','Compte créer avec succés !');
+    }
+
+    // Deconnexion
+    public function deconnexion(){
+        Session::forget('utilisateur');
+        return view('login');
     }
 }
