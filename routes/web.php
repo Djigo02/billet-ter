@@ -5,6 +5,8 @@ use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\UtilisateurController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Gare;
+use App\Models\Reservation;
+use App\Models\Utilisateur;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +18,16 @@ use App\Models\Gare;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get('/admin', function(){
+    $users = Utilisateur::all();
+    $users = count($users);
+    $reservations = Reservation::all();
+    $ca = 0;
+    foreach ($reservations as $value) {
+        $ca =$ca + $value->prix;
+    }
+    return view("admin.index",['ca'=>$ca, 'utilisateurs'=>$users]);
+});
 
 Route::get('/', function () {
     //return view('reservations.welcome', ['gares'=>Gare::all(), 'garesdest'=>Gare::all()->sortByDesc('id')]);
