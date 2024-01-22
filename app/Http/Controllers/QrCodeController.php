@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Gare;
 use App\Models\Reservation;
+use Barryvdh\DomPDF\Facade\Pdf;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
@@ -70,7 +72,6 @@ class QrCodeController extends Controller
         $reservation->id_user = Session::get('utilisateur')['id'];
         // dd($reservation);
         $reservation->save();
-        
         return view("reservations.qrcode", ['info'=>$info]);
     }
 
@@ -85,6 +86,9 @@ class QrCodeController extends Controller
             'date'=> $detail->date_emission,
             'fin'=> $detail->fin_validite
         ];
+        // new DateTime(explode(" ",$detail->date_emission)[3])
+        // dd($diff);
+        // return Pdf::loadView("reservations.detail", compact("info"))->stream();
         return view("reservations.qrcode", ['info'=>$info]);
     }
 }

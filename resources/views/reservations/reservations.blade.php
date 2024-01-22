@@ -17,8 +17,9 @@
     <div class="alert alert-success col-4 offset-4 h5 text-center mb-4">Mes reservations Billet-TER</div>
     <div class="container row">
         @foreach ($reservations as $reservation)
+        <?php $diff = date_diff(new DateTime(date('d-M-Y')),new DateTime(explode(" ",$reservation->fin_validite)[4])); ?>
             <div class="container mt-3 col-3 offset-1 mb-2 d-flex align-items-center justify-content-center">
-                <div class="card" style="width: 18rem;">
+                <div class="card {{$diff->format('%R%a') < 0 ? "bg-danger": "" }}" style="width: 18rem;">
                     <div class="text-center mt-2"><img src="{{ asset($reservation->image) }}" alt="Qr Code reçu"></div>
                     <br>
                     <ul class="list-group list-group-flush">
@@ -30,10 +31,15 @@
                                     $key != 'created_at' &&
                                     $key != 'updated_at' &&
                                     $key != 'prix')
-                                <li class="list-group text-center text-center">{{ $item }}</li>
+                                <li class="list-group-item text-center">{{ $item }}</li>
                             @endif
                         @endforeach
-                        <li class="list-group-item text-center text-center">Prix : {{ $reservation->prix }} FCFA</li>
+                        <li class="list-group-item text-center">Prix : {{ $reservation->prix }} FCFA</li>
+                        @if ($diff->format('%R%a') < 0)
+                            <li class="list-group-item  text-center">Expiré depuis {{$diff->format('%R%a jours')}}</li>
+                        @else
+                            <li class="list-group-item  text-center">Expire dans {{$diff->format('%R%a jours')}}</li>
+                        @endif
                     </ul>
                     <div class="card-body d-flex justify-content-around">
                         {{-- <a href="{{ url('/') }}" class="btn btn-dark card-link">Retour</a> --}}
